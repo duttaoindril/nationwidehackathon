@@ -102,5 +102,42 @@
                 this.page = 'view404';
             },
         });
+
+        function getTrainingData(cb) {
+            labels = (Object.values(config.labels)).sort().reduce((accumulator, currentValue, currentIndex, array) => {
+                accumulator[Object.keys(config.labels)[Object.values(config.labels).indexOf(array[currentIndex])]] =
+                    array[currentIndex];
+                return accumulator;
+            }, {});
+            var tcnfg = config.training[config.training.config + "Training"];
+            cb([Object.keys(labels), thetrainingdata], [tcnfg.testSplit, tcnfg.learningRate, tcnfg.epochs,
+                tcnfg.minAccuracy, tcnfg.maxLoss
+            ]);
+        }
+        // ============================ MODEL TRAINING CODE ============================
+        var time = Date.now(); // The start time of everything
+        let model; // A global variable for holding the model
+        getTrainingData((tdbdata, tdbconfig) => { // Downloading data live to train on
+            console.log("AFTER " + (Date.now() - time) + "MS, MAIN DOWNLOAD_DATA: ", tdbdata[0], tdbdata[1].length +
+                " rows X " + tdbdata[1][0].length + " columns.");
+            getTrainedModel(tdbdata, tdbconfig).then(mdl => { // Calling the train model function and logging the results
+                model = mdl.model;
+                var acc = mdl.accuracy;
+                var los = mdl.loss;
+                console.log("AFTER " + (Date.now() - time) + "MS, MAIN MODEL:" + model, "ACCURACY: " +
+                    acc + (acc >= tdbconfig[3] ? " → ✓" : " → ✖"), "LOSS: " + los + (los <=
+                        tdbconfig[4] ? " → ✓" : " → ✖"));
+                getConfidences(model, tdbdata[1][0].slice(0, -1)).then(confs => { // Making a prediction using the model and first row of tdbdata
+                    confs.push(Object.keys(labels)[confs.indexOf(Math.max.apply({}, confs))]);
+                    console.log("AFTER " + (Date.now() - time) + "MS, MAIN RUNNER 1: ", confs,
+                        tdbdata[1][0]);
+                });
+                getConfidences(model, []).then(confs => { // Making a prediction using the model and first row of tdbdata
+                    confs.push(Object.keys(labels)[confs.indexOf(Math.max.apply({}, confs))]);
+                    console.log("AFTER " + (Date.now() - time) + "MS, MAIN RUNNER 2: ", confs, []);
+                });
+                console.log("Finially finished in " + (Date.now() - time) + "ms.");
+            });
+        });
     </script>
 </dom-module>
