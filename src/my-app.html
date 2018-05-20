@@ -15,8 +15,8 @@
     <template>
         <style>
             :host {
-                --app-primary-color: #4285f4;
-                --app-secondary-color: black;
+                --app-primary-color: #FF9E80;
+                --app-secondary-color: rgb(0, 0, 0);
                 display: block;
             }
 
@@ -48,7 +48,7 @@
         </style>
         <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
         <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
-        <app-drawer-layout fullbleed narrow="{{narrow}}">
+        <app-drawer-layout fullbleed narrow="{{narrow}}" responsive-width="3000px">
             <!-- Drawer content -->
             <app-drawer id="drawer" swipe-open="[[narrow]]">
                 <app-toolbar>Menu</app-toolbar>
@@ -63,7 +63,8 @@
                 <app-header condenses reveals effects="waterfall">
                     <app-toolbar>
                         <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-                        <div main-title>My App</div>
+                        <img src="../images/favicon.svg" alt="Logo">
+                        <div main-title>alance</div>
                     </app-toolbar>
                 </app-header>
                 <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
