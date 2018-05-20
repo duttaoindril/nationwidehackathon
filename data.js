@@ -18,7 +18,7 @@ var config = {
             "epochs": 15,
             "learningRate": 0.01,
             "maxLoss": 2,
-            "minAccuracy": ".35",
+            "minAccuracy": ".3",
             "speed": "crazy",
             "testSplit": 0
         },
