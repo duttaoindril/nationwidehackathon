@@ -1,8 +1,60 @@
+<!DOCTYPE html>
 <html>
+<!-- http-server -->
+<!-- browser-sync start --proxy 0.0.0.0:8080 --files "./**/*" -->
+
 <head>
+    <title>Nationwide Angelhack House Predictions</title>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link type="text/css" rel="stylesheet" href="normalize.css">
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, .9);
+            color: #00ff00;
+            overflow-x: hidden;
+        }
+
+        #horizontal-section {
+            width: 100%;
+            overflow-x: auto;
+            background-color: white;
+        }
+    </style>
 </head>
+
 <body>
+    <h1>Nationwide Angelhack House Pricing Training &amp; Predicting Test</h1>
+    <hr>
+    <input type="checkbox" id="showGraphs" onchange="toggleGraph()" checked>
+    <label for="showGraphs">Show Vega Graphs?</label>
+    <div id="horizontal-section" style="display:block">
+        <div class="canvases" id="lossCanvas"></div>
+        <div class="canvases" id="accuracyCanvas"></div>
+    </div>
+    <hr>
+    <span id="demo-status">Open console for better logs; Loading...
+        <br>
+        <br> </span>
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@3.3.0/build/vega.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@2.3.1/build/vega-lite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@3.5.0/build/vega-embed.min.js"></script>
+    <script src="test.js"></script>
+    <script src="tfmodel.js"></script>
     <script src="nationwidehackathon-export.js"></script>
     <script src="datacleaner.js"></script>
 </body>
+
 </html>

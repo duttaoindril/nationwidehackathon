@@ -1,5 +1,6 @@
 var deleted = [2, 6, 7, 8, 9];
 var toRemoveBankAccounts = [];
+var allData = [];
 
 for (var idx = data.bankAccounts.length - 1; idx > -1; idx--)
     if (deleted.indexOf(data.bankAccounts[idx].customerId) > -1) {
@@ -44,7 +45,7 @@ for (customer of data.customers) {
     // console.log(allCustomerData.reduce((newer, orginal) => Object.assign(newer, orginal), {}));
     // console.log("============================================================================================================================================");
     //[age, income, savings, checkings, num loans, sum debt, sum monthly payment, sum credit spending, sum debit spending]
-    console.log([allCustomerData.customer.age,
+    allData.push([allCustomerData.customer.age,
         allCustomerData.customer.householdIncome,
         allCustomerData.accounts[0].balance,
         allCustomerData.accounts[1].balance,
@@ -58,8 +59,22 @@ for (customer of data.customers) {
 }
 
 function getLabel(price) {
-    price % 10000000;
-    price / 10000000;
     min = (price - (price % 10000000)) / 10000000;
+    if (min >= 9) return "$900000.00 - $1000000.00+";
     return "$" + min * 100000 + ".00 - $" + (min + 1) * 100000 + ".00";
 }
+
+var labels = [];
+for (var i = 0; i < 10; i++) {
+    labels.push(getLabel(i * 10000000));
+}
+console.log(labels);
+console.log(allData);
+
+var str = "";
+for (var i = 0; i < allData.length; i++) {
+    for (var j = 0; j < allData[i].length; j++)
+        str += (allData[i][j] + "\t");
+    str += "\n";
+}
+console.log(str);
