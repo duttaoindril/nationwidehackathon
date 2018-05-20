@@ -43,7 +43,7 @@ function getTrainingData(cb) {
         }, {});
         var tcnfg = config.training[config.training.config + "Training"];
         console.log(Object.keys(labels));
-        cb([Object.keys(labels), gendata()], [tcnfg.testSplit, tcnfg.learningRate, tcnfg.epochs, tcnfg.minAccuracy, tcnfg.maxLoss]);
+        cb([Object.keys(labels), thetrainingdata], [tcnfg.testSplit, tcnfg.learningRate, tcnfg.epochs, tcnfg.minAccuracy, tcnfg.maxLoss]);
     });
 }
 // ============================ MODEL TRAINING CODE ============================
