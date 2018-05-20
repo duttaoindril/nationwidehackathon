@@ -42,9 +42,12 @@ function getPreppedTrainingData(testSplit, data, classes, numClasses) {
             dataByClass.push([]);
             targetsByClass.push([]);
         }
+        console.log(dataByClass);
+        console.log(targetsByClass);
         for (const example of data) {
             const target = example[example.length - 1];
             const data = example.slice(0, example.length - 1);
+            console.log(target);
             dataByClass[target].push(data);
             targetsByClass[target].push(target);
         }
