@@ -11,6 +11,8 @@
         "src/**/*",
         "images/**/*",
         "tfmodel.js",
+        "data.js",
+        "generator.js",
         "bower.json"
     ],
     "extraDependencies": [

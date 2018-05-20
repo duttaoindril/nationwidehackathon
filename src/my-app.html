@@ -10,6 +10,12 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+<!-- <link rel="import" href=""> -->
 <link rel="import" href="my-icons.html">
 <dom-module id="my-app">
     <template>
@@ -17,11 +23,12 @@
             :host {
                 --app-primary-color: #FF9E80;
                 --app-secondary-color: rgb(0, 0, 0);
+                --app-tertiary-color: rgb(255, 255, 255);
                 display: block;
             }
 
             app-header {
-                color: #fff;
+                color: var(--app-tertiary-color);
                 background-color: var(--app-primary-color);
             }
 
@@ -30,6 +37,16 @@
             }
 
             app-drawer-layout {
+                width: 100%;
+                height: 100%;
+            }
+
+            iron-pages {
+                width: 100%;
+                height: 100%;
+            }
+
+            .iron-selected {
                 width: 100%;
                 height: 100%;
             }
@@ -49,16 +66,6 @@
             .drawer-list a.iron-selected {
                 color: black;
                 font-weight: bold;
-            }
-
-            #topLogo {
-                width: 100%;
-                text-align: center;
-            }
-
-            #topLogo img {
-                width: 80%;
-                margin: 30px auto 0px auto;
             }
         </style>
         <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
@@ -82,12 +89,10 @@
                         <div main-title>alance</div>
                     </app-toolbar>
                 </app-header>
-                <div id="topLogo">
-                    <img src="../images/logo.svg" alt="Logo"> </div>
                 <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
                     <my-view1 name="view1"></my-view1>
-                    <my-view2 name="view2"></my-view2>
-                    <my-view3 name="view3"></my-view3>
+                    <my-view2 name="view2" users="{{userData}}"></my-view2>
+                    <my-view3 name="view3" users="[[userData]]"></my-view3>
                     <my-view404 name="view404"></my-view404>
                 </iron-pages>
             </app-header-layout>
@@ -111,7 +116,6 @@
                 }
             },
             _pageChanged: function (page) {
-                // Load page import on demand. Show 404 page if fails
                 var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
                 this.importHref(resolvedPageUrl, null, this._showPage404, true);
             },

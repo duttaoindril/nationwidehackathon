@@ -1,37 +1,222 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="shared-styles.html">
-
 <dom-module id="my-view2">
-  <template>
-    <style include="shared-styles">
-      :host {
-        display: block;
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+                padding: 10px;
+            }
 
-        padding: 10px;
-      }
-    </style>
+            paper-card {
+                display: inline-block;
+                width: 45%;
+                margin: 2%;
+                height: 17.5%;
+                background-color: var(--app-tertiary-color);
+                text-align: center;
+                vertical-align: top;
+            }
 
-    <div class="card">
-      <div class="circle">2</div>
-      <h1>View Two</h1>
-      <p>Ea duis bonorum nec, falli paulo aliquid ei eum.</p>
-      <p>Id nam odio natum malorum, tibique copiosae expetenda mel ea.Detracto suavitate repudiandae no eum. Id adhuc minim soluta nam.Id nam odio natum malorum, tibique copiosae expetenda mel ea.</p>
-    </div>
-  </template>
+            paper-button {
+                display: inline-block;
+                width: 45%;
+                margin: 2%;
+                height: 17.5%;
+                background-color: var(--app-tertiary-color);
+                text-align: center;
+                vertical-align: top;
+            }
 
-  <script>
-    Polymer({
-      is: 'my-view2',
-    });
-  </script>
+            paper-button h1 {
+                height: 100px;
+            }
+
+            paper-button.addPerson {
+                background-color: var(--app-primary-color);
+            }
+
+            #usersInView {
+                display: contents;
+            }
+
+            #fillpath2 {
+                fill: var(--app-tertiary-color);
+            }
+
+            #fillpath {
+                fill: var(--app-tertiary-color);
+            }
+
+            #modal {
+                background-color: white;
+            }
+
+            #modal paper-button {
+                width: 45%;
+                margin: 2%;
+                height: 90px;
+                display: inline-block;
+                background-size: cover;
+                background-position: center;
+            }
+
+            .card-content,
+            .card-actions {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 55%;
+            }
+
+            .rate-image {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: 45%;
+                background-size: cover;
+            }
+
+            .rate-header {
+                @apply --paper-font-headline;
+            }
+
+            .rate-name {
+                color: var(--paper-grey-600);
+                margin: 10px 0;
+            }
+
+            paper-icon-button.rate-icon {
+                --iron-icon-fill-color: white;
+                --iron-icon-stroke-color: var(--paper-grey-600);
+            }
+
+            a paper-button,
+            a:active paper-button,
+            a:visited paper-button {
+                color: white;
+                border: none;
+                text-decoration: inherit;
+                text-decoration-color: var(--app-primary-color);
+            }
+        </style>
+        <paper-dialog id="modal">
+            <template is="dom-repeat" items="{{banks}}">
+                <paper-button dialog-confirm id="[[item]]" style="background-image: url('../images/[[item]].png');" on-tap="addPerson"></paper-button>
+            </template>
+        </paper-dialog>
+        <div id="usersInView"></div>
+        <paper-button class="addPerson" on-tap="open" raised>
+            <svg xmlns="http://www.w3.org/2000/svg" width="115" height="115" viewBox="0 0 18 18">
+                <path id="fillpath" d="M10 8c1.66 0 2.99-1.34 2.99-3S11.66 2 10 2 7 3.34 7 5s1.34 3 3 3zm-6 2V8h2V6H4V4H2v2H0v2h2v2h2zm6 0c-2.33 0-7 1.17-7 3.5V16h14v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                />
+            </svg>
+        </paper-button>
+        <a href="/view3" tabindex="-1">
+            <paper-button class="addPerson" raised>
+                <svg xmlns="http://www.w3.org/2000/svg" width="115" height="115" viewBox="0 0 1024 517">
+                    <path id="fillpath2" d="M742 508q-9-9-9-22.5t9-22.5l172-172H32q-13 0-22.5-9.5T0 259t9.5-22.5T32 227h883L743 55q-10-9-10-22.5T743 10q9-10 22.5-10T788 10l227 226q9 9 9 22.5t-9 22.5L787 508q-9 9-22.5 9t-22.5-9z"
+                    />
+                </svg>
+            </paper-button>
+        </a>
+    </template>
+    <script>
+        Polymer({
+            is: 'my-view2',
+            properties: {
+                labels: {
+                    type: Array,
+                    value: ["0 - 100000", "100000 - 200000", "200000 - 300000", "300000 - 400000",
+                        "400000 - 500000", "500000 - 600000", "600000 - 700000", "700000 - 800000",
+                        "800000 - 900000", "900000 - 1000000+"
+                    ]
+                },
+                people: {
+                    type: Array,
+                    value: ["Oindril", "Alex", "Jenny", "Bob", "Cindy", "Kelly"]
+                },
+                banks: {
+                    type: Array,
+                    value: ["Chase", "Bank of America", "Wells Fargo", "Citi Bank", "Capital One", "USAA"]
+                },
+                users: {
+                    type: Array,
+                    notify: true
+                },
+                dataString: {
+                    type: String,
+                    computed: "getDataString(users)"
+                }
+            },
+            getDataString: function (users) {
+                var dataString = "";
+                for (user of users)
+                    dataString +=
+                    '<paper-card class="rate"><div class="card-content"><div class="rate-header">' + user.name +
+                    '</div><div class="rate-name">' + user.bank +
+                    '</div></div><div class="card-actions"><paper-icon-button class="rate-icon" icon="my-icons:settings"></paper-icon-button><paper-icon-button class="rate-icon" icon="my-icons:delete"></paper-icon-button></div><div class="rate-image" style="background-image: url(\'../images/' +
+                    user.bank + ".png\');'></div></paper-card>";
+                this.$.usersInView.innerHTML = dataString;
+                return dataString;
+            },
+            addPerson: function (event) {
+                console.log("BEFORE:", this.users);
+                var data = this.users;
+                if (this.users != undefined && this.users.length > 5) alert(
+                    "No more than 6 residents allowed in a family household legally in California.");
+                else data = this.compile(this.users, event.srcElement.id);
+                this.set("users", data);
+                console.log("AFTER:", this.users);
+                var dataString = "";
+                for (user of this.users)
+                    dataString +=
+                    '<paper-card class="rate"><div class="card-content"><div class="rate-header">' + user.name +
+                    '</div><div class="rate-name">' + user.bank +
+                    '</div></div><div class="card-actions"><paper-icon-button class="rate-icon" icon="my-icons:settings"></paper-icon-button><paper-icon-button class="rate-icon" icon="my-icons:delete"></paper-icon-button></div><div class="rate-image" style="background-image: url(\'../images/' +
+                    user.bank + '.png\');"></div></paper-card>';
+                this.$.usersInView.innerHTML = dataString;
+                return dataString;
+            },
+            open: function () {
+                this.$.modal.open();
+            },
+            getNormalNum: function () {
+                var rand = Math.random() * 100;
+                if (rand <= 10)
+                    return 0;
+                if (rand <= 30)
+                    return 1;
+                if (rand <= 70)
+                    return 2;
+                if (rand <= 90)
+                    return 3;
+                return 4;
+            },
+            compile: function (array, bank) {
+                var data;
+                var length = 0;
+                if (array === undefined || array.length == 0)
+                    data = addGenRow(0, this.labels);
+                else {
+                    data = this.getNormalNum();
+                    length = array.length;
+                }
+                if (array == undefined)
+                    array = [{
+                        "name": this.people[length],
+                        "bank": bank,
+                        "data": data
+                    }];
+                else array.push({
+                    "name": this.people[length],
+                    "bank": bank,
+                    "data": data
+                });
+                return array;
+            }
+        });
+    </script>
 </dom-module>
