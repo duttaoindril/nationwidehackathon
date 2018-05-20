@@ -1,3 +1,4 @@
+//Generates 1000 random data points
 function main(){
     var output = [];
     var temp = [0,0,0,0,0,0,0,0,0];
@@ -6,8 +7,8 @@ function main(){
     var sumSavings, sumChecking; 
 
     for (i=0; i<1000; i++) {
-        age =       Math.round(Math.random()*53 + 18);
-        income =    Math.round(1000000 * Math.pow(Math.E, 0.0155 * age));
+        age =       Math.round(Math.random()*52 + 18);
+        income =    Math.round(6000000 * Math.pow(Math.E, 0.0155 * age) + getRandomInt(-2000000, 2000000));
         savings =   Math.round(7000000 * Math.pow(Math.E, 0.000000008 * income));
         checking =  Math.round(1000000 * Math.pow(Math.E, 0.000000001 * income));
         numLoan =   Math.round(Math.random()*2);
@@ -21,8 +22,7 @@ function main(){
         }
         sumSavings =    Math.round(0.4083 * income + Math.random() * 10000);
         sumChecking =   Math.round(2000000 * Math.pow(Math.E, 0.000000009*income));
-        
-        output.push([age,
+        var out =  ([age,
                      income,
                      savings,
                      checking,
@@ -31,8 +31,15 @@ function main(){
                      loanPay,
                      sumSavings,
                      sumChecking]);
+        output.push(out);
+        console.log(out.toString());
+        
     }
-    console.log(output);
+    
 }
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
 main()
