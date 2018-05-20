@@ -91,10 +91,7 @@ async function trainModel(xTrain, yTrain, xTest, yTest, params, cb) {
         epochs: params.epochs,
         callbacks: {
             onEpochEnd: async (epoch, logs) => {
-                if (show) {
-                    plotLosses(lossValues, epoch, logs.loss);
-                    plotAccuracies(accuracyValues, epoch, logs.acc);
-                }
+                
                 await tf.nextFrame();
             }
         }

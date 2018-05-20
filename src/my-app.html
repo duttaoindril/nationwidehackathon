@@ -132,10 +132,6 @@
                     console.log("AFTER " + (Date.now() - time) + "MS, MAIN RUNNER 1: ", confs,
                         tdbdata[1][0]);
                 });
-                getConfidences(model, []).then(confs => { // Making a prediction using the model and first row of tdbdata
-                    confs.push(Object.keys(labels)[confs.indexOf(Math.max.apply({}, confs))]);
-                    console.log("AFTER " + (Date.now() - time) + "MS, MAIN RUNNER 2: ", confs, []);
-                });
                 console.log("Finially finished in " + (Date.now() - time) + "ms.");
             });
         });
