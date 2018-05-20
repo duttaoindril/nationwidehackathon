@@ -10,8 +10,8 @@ function gendata() {
     for (i = 0; i < 1000; i++) {
         age = Math.round(Math.random() * 52 + 18);
         income = Math.round(6000000 * Math.pow(Math.E, 0.0155 * age) + getRandomInt(-2000000, 2000000));
-        savings = Math.round(7000000 * Math.pow(Math.E, 0.000000008 * income));
-        checking = Math.round(1000000 * Math.pow(Math.E, 0.000000001 * income));
+        savings = Math.round(-0.0000002 * Math.pow(income, 2) + 66.065 * income - 400000000);
+        checking = Math.round(-0.0000002 * Math.pow(income, 2) + 66.065 * income - 400000000);
         numLoan = Math.round(Math.random() * 2);
         if (numLoan == 0) {
             loanVal = 0;
@@ -26,8 +26,8 @@ function gendata() {
         x = 7*age + 3*income + 10*savings + 9*checking + 4*loanVal + loanPay + 2*sumSavings + 6*sumChecking;
 
         classifier = 40000000 * Math.pow(Math.E, 0.00000000007 * x);
-        classifier = Math.round(classifier/100000) * 100000;
-        classifier = classifier + " - " + (classifier + 100000);
+        classifier = Math.round(classifier);
+
 
         var out = ([age,
             income,
