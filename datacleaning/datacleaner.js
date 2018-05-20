@@ -1,7 +1,5 @@
-console.log(data);
 var deleted = [2, 6, 7, 8, 9];
 var toRemoveBankAccounts = [];
-console.log(deleted);
 
 for (var idx = data.bankAccounts.length - 1; idx > -1; idx--)
     if (deleted.indexOf(data.bankAccounts[idx].customerId) > -1) {
@@ -21,22 +19,20 @@ for (var idx = data.customers.length - 1; idx > -1; idx--)
     if (deleted.indexOf(data.customers[idx].id) > -1)
         data.customers.splice(idx, 1);
 
-console.log(data);
-
 for (customer of data.customers) {
-    console.log("============================================================================================================================================");
+    // console.log("============================================================================================================================================");
     var bankAccounts = [];
-    console.log("customer", customer);
+    // console.log("customer", customer);
     var accounts = data.bankAccounts.filter(acc => {
         if (acc.customerId == customer.id) bankAccounts.push(acc.id);
         return acc.customerId == customer.id;
     });
-    console.log("accounts", accounts);
+    // console.log("accounts", accounts);
     var loans = data.bankLoans.filter(loan => loan.customerId == customer.id);
-    console.log("loans", loans);
-    console.log("bankAccounts", bankAccounts);
+    // console.log("loans", loans);
+    // console.log("bankAccounts", bankAccounts);
     var transactions = data.bankAccountTransactions.filter(transaction => bankAccounts.indexOf(transaction.bankAccountId) > -1);
-    console.log("transactions", transactions);
+    // console.log("transactions", transactions);
     let allCustomerData = {
         customer,
         accounts,
@@ -46,5 +42,5 @@ for (customer of data.customers) {
     // var allCustomerData = [customer].concat(accounts).concat(loans);
     console.log("allCustomerData", allCustomerData);
     // console.log(allCustomerData.reduce((newer, orginal) => Object.assign(newer, orginal), {}));
-    console.log("============================================================================================================================================");
+    // console.log("============================================================================================================================================");
 }
