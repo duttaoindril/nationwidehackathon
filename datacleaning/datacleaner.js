@@ -40,7 +40,8 @@ for (customer of data.customers) {
     let allCustomerData = {
         customer,
         accounts,
-        loans
+        loans,
+        transactions
     };
     // var allCustomerData = [customer].concat(accounts).concat(loans);
     console.log("allCustomerData", allCustomerData);
