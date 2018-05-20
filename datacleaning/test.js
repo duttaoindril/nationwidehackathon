@@ -32,10 +32,6 @@ function autorun() {
     };
 }
 
-function getData() {
-
-}
-
 function getTrainingData(cb) {
     db.ref("config").once("value", config => {
         config = config.val();
@@ -46,7 +42,8 @@ function getTrainingData(cb) {
             return accumulator;
         }, {});
         var tcnfg = config.training[config.training.config + "Training"];
-        cb(getData(), [tcnfg.testSplit, tcnfg.learningRate, tcnfg.epochs, tcnfg.minAccuracy, tcnfg.maxLoss]);
+        console.log(Object.keys(labels));
+        cb([Object.keys(labels), gendata()], [tcnfg.testSplit, tcnfg.learningRate, tcnfg.epochs, tcnfg.minAccuracy, tcnfg.maxLoss]);
     });
 }
 // ============================ MODEL TRAINING CODE ============================
