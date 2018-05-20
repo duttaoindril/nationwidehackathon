@@ -6,7 +6,7 @@ function gendata() {
     var numLoan, loanVal, loanPay;
     var sumSavings, sumChecking;
     var classifier, x;
-    for (i = 0; i < 1000; i++) {
+    for (i = 0; i < 996; i++) {
         age = Math.round(Math.random() * 52 + 18);
         income = Math.round(6000000 * Math.pow(Math.E, 0.0155 * age) + getRandomInt(-2000000, 2000000));
         savings = Math.round(-0.0000002 * Math.pow(income, 2) + 66.065 * income - 400000000);

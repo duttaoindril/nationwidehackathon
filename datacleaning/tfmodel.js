@@ -42,12 +42,9 @@ function getPreppedTrainingData(testSplit, data, classes, numClasses) {
             dataByClass.push([]);
             targetsByClass.push([]);
         }
-        console.log(dataByClass);
-        console.log(targetsByClass);
         for (const example of data) {
             const target = example[example.length - 1];
             const data = example.slice(0, example.length - 1);
-            console.log(target);
             dataByClass[target].push(data);
             targetsByClass[target].push(target);
         }
@@ -59,8 +56,8 @@ function getPreppedTrainingData(testSplit, data, classes, numClasses) {
             const [xTrain, yTrain, xTest, yTest] = convertToTensors(dataByClass[i], targetsByClass[i], testSplit, numClasses);
             xTrains.push(xTrain);
             yTrains.push(yTrain);
-            xTests.push(xTest);
-            yTests.push(yTest);
+            // xTests.push(xTest);
+            // yTests.push(yTest);
         }
         const concatAxis = 0;
         return [
@@ -125,10 +122,10 @@ function convertToTensors(data, targets, testSplit, numClasses) {
     const xs = tf.tensor2d(data, [numExamples, xDims]);
     const ys = tf.oneHot(tf.tensor1d(targets), numClasses);
     const xTrain = xs.slice([0, 0], [numTrainExamples, xDims]);
-    const xTest = xs.slice([numTrainExamples, 0], [numTestExamples, xDims]);
+    // const xTest = xs.slice([numTrainExamples, 0], [numTestExamples, xDims]);
     const yTrain = ys.slice([0, 0], [numTrainExamples, numClasses]);
-    const yTest = ys.slice([0, 0], [numTestExamples, numClasses]);
-    return [xTrain, yTrain, xTest, yTest];
+    // const yTest = ys.slice([0, 0], [numTestExamples, numClasses]);
+    return [xTrain, yTrain, null, null];
 }
 
 function convertMS(ms) {
