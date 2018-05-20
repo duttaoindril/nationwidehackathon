@@ -28,7 +28,7 @@ for (customer of data.customers) {
         return acc.customerId == customer.id;
     });
     // console.log("accounts", accounts);
-    var loans = data.bankLoans.filter(loan => loan.customerId == customer.id);
+    var loans = data.bankLoans.filter(loan => loan.customerId == customer.id && loan.type != "30 Year Fixed Mortgage");
     // console.log("loans", loans);
     // console.log("bankAccounts", bankAccounts);
     var transactions = data.bankAccountTransactions.filter(transaction => bankAccounts.indexOf(transaction.bankAccountId) > -1);
@@ -43,4 +43,11 @@ for (customer of data.customers) {
     console.log("allCustomerData", allCustomerData);
     // console.log(allCustomerData.reduce((newer, orginal) => Object.assign(newer, orginal), {}));
     // console.log("============================================================================================================================================");
+}
+
+function getLabel(price) {
+    price % 100000;
+    price / 100000;
+    min = (price - (price % 100000)) / 100000;
+    return min * 100000 + " - " + (min + 1) * 100000;
 }
