@@ -43,6 +43,17 @@ for (customer of data.customers) {
     console.log("allCustomerData", allCustomerData);
     // console.log(allCustomerData.reduce((newer, orginal) => Object.assign(newer, orginal), {}));
     // console.log("============================================================================================================================================");
+    //[age, income, savings, checkings, num loans, sum debt, sum monthly payment, sum credit spending, sum debit spending]
+    console.log([allCustomerData.customer.age,
+        allCustomerData.customer.householdIncome,
+        allCustomerData.accounts[0].balance,
+        allCustomerData.accounts[1].balance,
+        allCustomerData.loans.length,
+        allCustomerData.loans.reduce((acc, currentVal) => acc + currentVal.currentBalance, 0),
+        allCustomerData.loans.reduce((acc, currentVal) => acc + currentVal.monthlyPayment, 0),
+        allCustomerData.transactions.filter(word => word.creditDebitType == "Credit").reduce((acc, currentVal) => acc + currentVal.amount, 0),
+        allCustomerData.transactions.filter(word => word.creditDebitType == "Debit").reduce((acc, currentVal) => acc + currentVal.amount, 0)
+    ]);
 }
 
 function getLabel(price) {
