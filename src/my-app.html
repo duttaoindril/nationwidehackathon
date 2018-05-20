@@ -29,6 +29,11 @@
                 --paper-icon-button-ink-color: white;
             }
 
+            app-drawer-layout {
+                width: 100%;
+                height: 100%;
+            }
+
             .drawer-list {
                 margin: 0 20px;
             }
@@ -44,6 +49,16 @@
             .drawer-list a.iron-selected {
                 color: black;
                 font-weight: bold;
+            }
+
+            #topLogo {
+                width: 100%;
+                text-align: center;
+            }
+
+            #topLogo img {
+                width: 80%;
+                margin: 30px auto 0px auto;
             }
         </style>
         <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
@@ -63,10 +78,12 @@
                 <app-header condenses reveals effects="waterfall">
                     <app-toolbar>
                         <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-                        <img src="../images/favicon.svg" alt="Logo">
+                        <img src="../images/favicon.svg" alt="Title">
                         <div main-title>alance</div>
                     </app-toolbar>
                 </app-header>
+                <div id="topLogo">
+                    <img src="../images/logo.svg" alt="Logo"> </div>
                 <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
                     <my-view1 name="view1"></my-view1>
                     <my-view2 name="view2"></my-view2>
