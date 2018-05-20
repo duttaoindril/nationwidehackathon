@@ -52,13 +52,14 @@ for (customer of data.customers) {
         allCustomerData.loans.reduce((acc, currentVal) => acc + currentVal.currentBalance, 0),
         allCustomerData.loans.reduce((acc, currentVal) => acc + currentVal.monthlyPayment, 0),
         allCustomerData.transactions.filter(word => word.creditDebitType == "Credit").reduce((acc, currentVal) => acc + currentVal.amount, 0),
-        allCustomerData.transactions.filter(word => word.creditDebitType == "Debit").reduce((acc, currentVal) => acc + currentVal.amount, 0)
+        allCustomerData.transactions.filter(word => word.creditDebitType == "Debit").reduce((acc, currentVal) => acc + currentVal.amount, 0),
+        getLabel(allCustomerData.customer.price)
     ]);
 }
 
 function getLabel(price) {
-    price % 100000;
-    price / 100000;
-    min = (price - (price % 100000)) / 100000;
+    price % 10000000;
+    price / 10000000;
+    min = (price - (price % 10000000)) / 10000000;
     return min * 100000 + " - " + (min + 1) * 100000;
 }
