@@ -61,5 +61,5 @@ function getLabel(price) {
     price % 10000000;
     price / 10000000;
     min = (price - (price % 10000000)) / 10000000;
-    return min * 100000 + " - " + (min + 1) * 100000;
+    return "$" + min * 100000 + ".00 - $" + (min + 1) * 100000 + ".00";
 }
