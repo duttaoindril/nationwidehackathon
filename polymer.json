@@ -1,73 +1,33 @@
 {
-    "entrypoint": "index.html",
-    "shell": "src/my-app.js",
-    "sources": [
-        "images/**/*"
-    ],
-    "extraDependencies": [
-        "manifest.json",
-        "node_modules/@webcomponents/webcomponentsjs/*.js",
-        "!node_modules/@webcomponents/webcomponentsjs/gulpfile.js",
-        "node_modules/@webcomponents/webcomponentsjs/bundles/*.js"
-    ],
-    "builds": [{
-            "name": "esm-bundled",
-            "browserCapabilities": [
-                "es2015",
-                "modules"
-            ],
-            "js": {
-                "minify": true
-            },
-            "css": {
-                "minify": true
-            },
-            "html": {
-                "minify": true
-            },
-            "bundle": true,
-            "addServiceWorker": true
-        },
-        {
-            "name": "es6-bundled",
-            "browserCapabilities": [
-                "es2015"
-            ],
-            "js": {
-                "minify": true,
-                "transformModulesToAmd": true
-            },
-            "css": {
-                "minify": true
-            },
-            "html": {
-                "minify": true
-            },
-            "bundle": true,
-            "addServiceWorker": true
-        },
-        {
-            "name": "es5-bundled",
-            "js": {
-                "minify": true,
-                "compile": true,
-                "transformModulesToAmd": true
-            },
-            "css": {
-                "minify": true
-            },
-            "html": {
-                "minify": true
-            },
-            "bundle": true,
-            "addServiceWorker": true
-        }
-    ],
-    "moduleResolution": "node",
-    "npm": true,
-    "lint": {
-        "rules": [
-            "polymer-3"
-        ]
+  "entrypoint": "index.html",
+  "shell": "src/my-app.html",
+  "fragments": [
+    "src/my-view1.html",
+    "src/my-view2.html",
+    "src/my-view3.html",
+    "src/my-view404.html"
+  ],
+  "sources": [
+    "src/**/*",
+    "images/**/*",
+    "bower.json"
+  ],
+  "extraDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+  ],
+  "lint": {
+    "rules": ["polymer-1"]
+  },
+  "builds": [
+    {
+      "preset": "es5-bundled"
+    },
+    {
+      "preset": "es6-bundled"
+    },
+    {
+      "preset": "es6-unbundled"
     }
+  ]
 }
